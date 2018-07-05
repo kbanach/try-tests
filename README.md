@@ -4,5 +4,5 @@ from `lib/userModel.js` - `getUser('<user name>')`)
 
 -------
 
-# Short example of what is unit testing about (`tests.js` and `fibonacci.js`)
-# Prepared small tesing system, with some model (e.g. `some-model.js`) that we can ProxyQuire
+1. Short example of what is unit testing about (`tests.js` and `fibonacci.js`)
+1. Prepared small tesing system, with some model (e.g. `some-model.js`) that we can ProxyQuire
