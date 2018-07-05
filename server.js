@@ -21,6 +21,12 @@ function errorHandler(err, req, res, next) {
 app.use(bodyParser.json());
 app.use(errorHandler);
 
+app.post('/user', (req, res) => {
+    const newUser = userController.createUser(req.body);
+
+    res.json(newUser);
+});
+
 app.get('/user/:name', (req, res) => {
     res.json(userController.getId(req.params.name));
 });
