@@ -22,13 +22,25 @@ app.use(bodyParser.json());
 app.use(errorHandler);
 
 app.post('/user', (req, res) => {
-    const newUser = userController.createUser(req.body);
+    const newUser = userController.create(req.body.name);
 
     res.json(newUser);
 });
 
 app.get('/user/:name', (req, res) => {
-    res.json(userController.getId(req.params.name));
+    const user = userController.getByName(req.params.name);
+
+    if (!user) {
+        res.status(404).send({ error: 'User not found' });
+    }
+
+    res.json(user);
+});
+
+app.delete('/user/:name', (req, res) => {
+    userController.remove(req.params.name);
+
+    res.status(204).send();
 });
 
 // run server

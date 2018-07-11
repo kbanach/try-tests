@@ -21,6 +21,12 @@ class APIClient {
 
         return response.data;
     }
+
+    async deleteUser(name) {
+        const response = await this.axios.delete(`/user/${name}`);
+
+        return response.data;
+    }
 }
 
 module.exports = APIClient;

@@ -1,3 +1,5 @@
+const assert = require("assert");
+
 const APIClient = require('./APIClient');
 
 class AppDriver {
@@ -6,11 +8,27 @@ class AppDriver {
     }
 
     async createUser(name) {
-        return await this.apiClient.createUser(name);
+        return this.apiClient.createUser(name);
     }
 
     async assertUserGotCreated(name) {
-        return await this.apiClient.getUser(name);
+        const user = await this.apiClient.getUser(name);
+
+        assert.equal(user.name, name, "User doesn't exists");
+    }
+
+    async deleteUser(name) {
+        return await this.apiClient.deleteUser(name);
+    }
+
+    async assertUserNotFound(name) {
+        let response;
+
+        try{
+            response = await this.apiClient.getUser(name);
+        } catch(httpError) {
+            assert.equal(httpError.response.status, 404, "User found!");
+        }
     }
 }
 
