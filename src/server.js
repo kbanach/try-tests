@@ -21,27 +21,11 @@ function errorHandler(err, req, res, next) {
 app.use(bodyParser.json());
 app.use(errorHandler);
 
-app.post('/user', (req, res) => {
-    const newUser = userController.create(req.body.name);
+app.post('/user', userController.create);
 
-    res.json(newUser);
-});
+app.get('/user/:name', userController.getByName);
 
-app.get('/user/:name', (req, res) => {
-    const user = userController.getByName(req.params.name);
-
-    if (!user) {
-        res.status(404).send({ error: 'User not found' });
-    }
-
-    res.json(user);
-});
-
-app.delete('/user/:name', (req, res) => {
-    userController.remove(req.params.name);
-
-    res.status(204).send();
-});
+app.delete('/user/:name', userController.remove);
 
 // run server
 app.listen(3000, () => { console.log("Example app is running on port 3000") });
