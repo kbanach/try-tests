@@ -8,25 +8,31 @@ class AppDriver {
     }
 
     async createUser(user) {
-        return this.apiClient.createUser(user);
+        try {
+            return await this.apiClient.createUser(user);
+        } catch(httpError) {
+            if (httpError.response.status === 400) {
+                return false;
+            }
+        }
     }
 
-    async assertUserGotCreated(user) {
-        const foundUser = await this.apiClient.getUser(user.name);
+    async userExists(user) {
+        let foundUser;
 
-        assert.equal(user.name, foundUser.name, "User doesn't exists");
+        try{
+            foundUser = await this.apiClient.getUser(user.name);
+        } catch(httpError) {
+            if (httpError.response.status === 404) {
+                return false;
+            }
+        }
+
+        return user.name === foundUser.name;
     }
 
     async deleteUser(user) {
-        return await this.apiClient.deleteUser(user.name);
-    }
-
-    async assertUserNotFound(user) {
-        try{
-            await this.apiClient.getUser(user.name);
-        } catch(httpError) {
-            assert.equal(httpError.response.status, 404, "User found!");
-        }
+        return this.apiClient.deleteUser(user.name);
     }
 }
 

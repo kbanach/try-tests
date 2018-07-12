@@ -3,7 +3,10 @@ const mongoose = require('mongoose');
 require('./mongooseConnector');
 
 const UserSchema = mongoose.Schema({
-    name: String
+    name: {
+        type: String,
+        // required: true,
+    }
 });
 
 const User = mongoose.model('User', UserSchema);

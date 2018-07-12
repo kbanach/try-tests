@@ -19,6 +19,7 @@
   "devDependencies": {
     "axios": "^0.18.0",
     "chance": "^1.0.16",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "sinon": "^6.1.3"
   }
 }

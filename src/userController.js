@@ -1,11 +1,16 @@
 const User = require('./models/User');
 
 async function create(req, res) {
-    const newUser = new User(req.body);
+    const user = new User(req.body);
+    const validationErrors = user.validateSync();
 
-    newUser.save();
+    if(validationErrors){
+        res.status(400);
+    }
 
-    res.json(newUser);
+    user.save();
+
+    res.json(user);
 }
 
 async function getByName(req, res) {
@@ -30,3 +35,25 @@ module.exports = {
     getByName,
     remove,
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+// function create(UserModel, user) {
+//     try {
+//         UserModel.save(user);
+//     } catch(ex) {
+//         return { error: true };
+//     }
+
+//     return user;
+// }
+
+// module.exports = {
+//     create,
+//     getByName: async () => {
+//         throw new Error('Not implemented');
+//     },
+//     remove: async () => {
+//         throw new Error('Not implemented');
+//     },
+// }
