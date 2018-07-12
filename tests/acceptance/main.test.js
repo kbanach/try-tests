@@ -1,21 +1,24 @@
-const { expect } = require('chai');
-
+const User = require('./utils/fixtures/User');
 const { getAppDriverInstance } = require('./utils/helpers');
 
 const APP_DRIVER = getAppDriverInstance();
 
 describe('User managment', () => {
     it('Creates user', async () => {
-        const user = await APP_DRIVER.createUser("Gomez");
+        const user = new User();
 
-        return APP_DRIVER.assertUserGotCreated(user.name);
+        await APP_DRIVER.createUser(user);
+
+        return APP_DRIVER.assertUserGotCreated(user);
     });
 
     it('Deletes a user', async () => {
-        const user = await APP_DRIVER.createUser("Gomez");
-        
-        await APP_DRIVER.deleteUser(user.name);
+        const user = new User();
 
-        return APP_DRIVER.assertUserNotFound(user.name);
+        await APP_DRIVER.createUser(user);
+        
+        await APP_DRIVER.deleteUser(user);
+
+        return APP_DRIVER.assertUserNotFound(user);
     });
 });

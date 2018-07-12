@@ -10,8 +10,8 @@ class APIClient {
         });
     }
 
-    async createUser(name) {
-        const response = await this.axios.post('/user', { name });
+    async createUser(user) {
+        const response = await this.axios.post('/user', user);
 
         return response.data;
     }
