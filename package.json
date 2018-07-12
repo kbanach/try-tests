@@ -4,16 +4,21 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/server.js",
+    "test:acceptance": "mocha ./tests/acceptance"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "chai": "^4.1.2",
     "express": "^4.16.3",
-    "mocha": "^5.2.0",
     "mongoose": "^5.2.3"
+  },
+  "devDependencies": {
+    "axios": "^0.18.0",
+    "chance": "^1.0.16",
+    "mocha": "^5.2.0"
   }
 }

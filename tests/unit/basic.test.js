@@ -1,4 +1,5 @@
 const assert = require('assert');
+
 const testetModule = require('./fibonacci');
 
 // #1 Function calculates Fibonacci number based on given index, eg. for index=2, should return 1
